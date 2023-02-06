@@ -403,21 +403,10 @@ def load_args(args):
     args.labels = '%s/labels/%s/%d_balanced_labels/%s.txt' % (
         label_dir, args.dataset, args.num_labeled, args.label_split)
     
-    # if args.dataset == "star":
+    # if args.dataset == "stock":
     #     args.test_batch_size = args.batch_size
     #     args.labels = '%s/labels/%s/%d_balanced_labels/%s.txt' % (
     #         label_dir, args.dataset, args.num_labeled, args.label_split)
-
-    # elif args.dataset == "r304" or args.dataset == "area3" or args.dataset == "area5":
-    #     args.test_batch_size = args.batch_size
-    #     args.labels = '%s/labels/%s/%d_balanced_labels/%s.txt' % (
-    #         label_dir, args.dataset, args.num_labeled, args.label_split)
-    
-    # elif args.dataset == "gakken_demo" or args.dataset == "sands8":
-    #     args.test_batch_size = args.batch_size
-    #     args.labels = '%s/labels/%s/%d_balanced_labels/%s.txt' % (
-    #         label_dir, args.dataset, args.num_labeled, args.label_split)
-
     # else:
     #     sys.exit('Undefined dataset!')
 

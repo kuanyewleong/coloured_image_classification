@@ -35,10 +35,10 @@ def plot_confusion_matrix(cm, classes, result_path, correct, total, acc, args):
     accuracy = '\nAccuracy: {}/{} ({:.5f})\n'.format(correct, total, acc)
 
     if args.experiment == "initweights":
-        title = 'Initialize conv layer with pretrained EfficientNet on TheStar Area5 (normalized, small samples)' + \
+        title = 'Initialize conv layer with pretrained EfficientNet on Sands8 (normalized, small samples)' + \
             accuracy
     elif args.experiment == "finetunefc":
-        title = 'Fine-tuned fc layer EfficientNet on TheStar Area5 (normalized, small samples)' + \
+        title = 'Fine-tuned fc layer EfficientNet on Sands8 (normalized, small samples)' + \
             accuracy
     elif args.experiment == "rndweights":
         title = 'Combination of 4 chipsets* (EfficientNet, normalized, 81,200 balanced samples)' + accuracy
@@ -194,70 +194,11 @@ def eval_main():
     eval_loader = eval(**dataset_config, args=args)
 
     # Plot confusion matrix
-    classes_names = ['AngelBG8color_ROUND-DEFAULT-YELLOW', \
-        'AngelBG8color_ROUND-DEFAULT-GREEN', \
-        'AngelBG8color_ROUND-DEFAULT-PURPLE', \
-        'AngelBG8color_ROUND-DEFAULT-LIGHT_BLUE', \
-        'AngelBG8color_ROUND-DEFAULT-ORANGE', \
-        'AngelBG8color_ROUND-DEFAULT-RED', \
-        'AngelBG8color_ROUND-DEFAULT-BLACK', \
-        'AngelBG8color_ROUND-DEFAULT-BLUE', \
-        'PoC2019Scc_ROUND-DEFAULT-RED', \
-        'PoC2019Scc_ROUND-DEFAULT-ORANGE', \
-        'PoC2019Scc_ROUND-DEFAULT-BLUE', \
-        'PoC2019Scc_ROUND-DEFAULT-BLACK', \
-        'PoC2019Scc_ROUND-DEFAULT-GREEN', \
-        'PoC2019Scc_ROUND-DEFAULT-YELLOW', \
-        'PoC2019Scc_ROUND-DEFAULT-PINK', \
-        'PoC2019Scc_ROUND-DEFAULT-BROWN', \
-        'g2e_nonAEC_ROUND-DEFAULT-YELLOW', \
-        'g2e_nonAEC_ROUND-DEFAULT-BLACK', \
-        'g2e_nonAEC_ROUND-DEFAULT-BLUE', \
-        'g2e_nonAEC_ROUND-DEFAULT-GREEN', \
-        'g2e_nonAEC_ROUND-DEFAULT-RED', \
-        'sands8_ROUND-DEFAULT-ORANGE', \
-        'sands8_ROUND-DEFAULT-BLUE', \
-        'sands8_ROUND-DEFAULT-RED', \
-        'sands8_ROUND-DEFAULT-YELLOW', \
-        'sands8_ROUND-DEFAULT-BLACK', \
-        'sands8_ROUND-DEFAULT-LIGHT_BLUE', \
-        'sands8_ROUND-DEFAULT-VIOLET']
-
-    # classes_names = ['MBSPoC2022_ROUND-DEFAULT-RED', \
-    #     'MBSPoC2022_ROUND-NN-GREEN', \
-    #     'MBSPoC2022_ROUND-DEFAULT-LIGHT_BLUE', \
-    #     'MBSPoC2022_ROUND-NN-BLACK', \
-    #     'MBSPoC2022_ROUND-DEFAULT-ORANGE', \
-    #     'MBSPoC2022_ROUND-NN-VIOLET', \
-    #     'MBSPoC2022_ROUND-NN-YELLOW', \
-    #     'MBSPoC2022_ROUND-DEFAULT-BLACK', \
-    #     'MBSPoC2022_ROUND-DEFAULT-GREEN', \
-    #     'MBSPoC2022_ROUND-NN-ORANGE', \
-    #     'MBSPoC2022_ROUND-NN-PINK', \
-    #     'MBSPoC2022_ROUND-DEFAULT-YELLOW', \
-    #     'MBSPoC2022_ROUND-DEFAULT-VIOLET', \
-    #     'MBSPoC2022_ROUND-DEFAULT-NONAEC_GRAY', \
-    #     'MBSPoC2022_ROUND-NN-LIGHT_BLUE', \
-    #     'MBSPoC2022_ROUND-NN-BLUE', \
-    #     'MBSPoC2022_ROUND-DEFAULT-PINK', \
-    #     'MBSPoC2022_ROUND-DEFAULT-NONAEC_LIGHT_GREEN', \
-    #     'MBSPoC2022_ROUND-DEFAULT-BLUE', \
-    #     'MBSPoC2022_ROUND-DEFAULT-NONAEC_BROWN']
-
-    # classes_names = ['AngelBG8color_ROUND-DEFAULT-YELLOW', \
-    #     'AngelBG8color_ROUND-DEFAULT-GREEN', \
-    #     'AngelBG8color_ROUND-DEFAULT-PURPLE', \
-    #     'AngelBG8color_ROUND-DEFAULT-LIGHT_BLUE', \
-    #     'AngelBG8color_ROUND-DEFAULT-ORANGE', \
-    #     'AngelBG8color_ROUND-DEFAULT-RED', \
-    #     'AngelBG8color_ROUND-DEFAULT-BLACK', \
-    #     'AngelBG8color_ROUND-DEFAULT-BLUE']
-
-    # classes_names = ['ROUND-DEFAULT-PINK', 'ROUND-DEFAULT-BLUE', 'ROUND-DEFAULT-VIOLET',
-    #                  'ROUND-DEFAULT-RED', 'ROUND-DEFAULT-LIGHT_BLUE', 'ROUND-DEFAULT-GREEN',
-    #                  'ROUND-DEFAULT-BLACK', ' ROUND-DEFAULT-ORANGE', 'ROUND-DEFAULT-YELLOW',
-    #                  'ROUND-DEFAULT-DARK_BLUE', 'ROUND-NN-RED', 'ROUND-NN-GREEN',
-    #                  'ROUND-NN-BLACK', 'ROUND-NN-ORANGE', 'ROUND-NN-YELLOW']
+    classes_names = ['ROUND-DEFAULT-PINK', 'ROUND-DEFAULT-BLUE', 'ROUND-DEFAULT-VIOLET',
+                     'ROUND-DEFAULT-RED', 'ROUND-DEFAULT-LIGHT_BLUE', 'ROUND-DEFAULT-GREEN',
+                     'ROUND-DEFAULT-BLACK', ' ROUND-DEFAULT-ORANGE', 'ROUND-DEFAULT-YELLOW',
+                     'ROUND-DEFAULT-DARK_BLUE', 'ROUND-NN-RED', 'ROUND-NN-GREEN',
+                     'ROUND-NN-BLACK', 'ROUND-NN-ORANGE', 'ROUND-NN-YELLOW']
     
     cm, correct, total, acc = validate(eval_loader, model, args)
     plot_confusion_matrix(cm, classes_names, args.logdir,

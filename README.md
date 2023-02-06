@@ -1,4 +1,4 @@
-# Making Pretrained Models of Color Recognition Module
+# An Easy to use Coloured Image Classifiction Module
 
 Example of running the script for dataset called area3, train with resnet50, random weights, 3000 samples:
 ```bash

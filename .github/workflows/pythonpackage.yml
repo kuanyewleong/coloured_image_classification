@@ -1,0 +1,44 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.test.txt
+          pip install -e . --extra-index-url https://anon:${{ secrets.PYPI_PASSWORD }}@pypi.aisr.dev --use-feature=fast-deps          
+          pip check
+      - name: Check import sorting with isort
+        if: matrix.python-version >= 3.6
+        run: |
+          isort -c --diff main.py pretrain_cr_model/
+      - name: Static test
+        run: pylint main.py
+        # run: find . -name "*.py" -exec pylint {} \;
+      - name: Test with pytest
+        run: |
+          pytest test/ --cov-report=xml --cov=pretrain_cr_model
+      - name: Upload code coverage
+        run: |
+          codecov --token=${{ secrets.CODECOV_TOKEN }}

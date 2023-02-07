@@ -63,7 +63,8 @@ def create_data_loaders(weak_transformation, strong_transformation,
     sampler = SubsetRandomSampler(dataset.labeled_idx)
     batch_sampler = BatchSampler(sampler, args.batch_size, drop_last=True)
     train_loader = torch.utils.data.DataLoader(
-        dataset, batch_sampler=batch_sampler, num_workers=args.workers, pin_memory=False)
+        dataset, batch_sampler=batch_sampler, shuffle=True,
+        num_workers=args.workers, pin_memory=False)
 
     eval_dataset = db_eval.DBE(evaldir, False, eval_transformation)
     eval_loader = torch.utils.data.DataLoader(

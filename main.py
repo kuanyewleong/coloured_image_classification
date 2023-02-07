@@ -38,7 +38,7 @@ def run():
     args.device = torch.device('cuda')
     model = helpers.create_model(num_classes, args)
     optimizer = torch.optim.SGD(model.parameters(),
-		args.lr, momentum=0.9,weight_decay=args.weight_decay, nesterov=args.nesterov)
+		args.lr, momentum=args.momentum, weight_decay=args.weight_decay, nesterov=args.nesterov)
     # optimizer = torch.optim.Adam(model.parameters(), lr=0.002)
     lr_scheduler = optim.lr_scheduler.ExponentialLR(optimizer, args.lr_decay)
 

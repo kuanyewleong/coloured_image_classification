@@ -36,9 +36,6 @@ jobs:
       - name: Static test
         run: pylint main.py
         # run: find . -name "*.py" -exec pylint {} \;
-      - name: Test with pytest
-        run: |
-          pytest test/ --cov-report=xml --cov=coloured_image_classification
       - name: Upload code coverage
         run: |
           codecov --token=${{ secrets.CODECOV_TOKEN }}

@@ -7,5 +7,4 @@ numpy
 torch==1.11.0
 torchvision
 tensorboardX
-torchgear==0.3.0
 
